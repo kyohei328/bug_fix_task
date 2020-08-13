@@ -5,6 +5,7 @@ RSpec.describe "Blogs", type: :system do
   before do
     driven_by(:selenium_chrome_headless)
   end
+  
   context 'blog一覧ページにアクセスした場合' do
     it 'blogの一覧ページが表示されること' do
       visit blogs_path
@@ -12,6 +13,7 @@ RSpec.describe "Blogs", type: :system do
       expect(page).to have_content 'Blogs'
     end
   end
+  
   context 'blog一覧から詳細ページにアクセスした場合' do
     it 'blogの詳細ページが表示されること' do
       blog = Blog.create(title: 'title_01', content: 'content_01')
@@ -22,6 +24,7 @@ RSpec.describe "Blogs", type: :system do
       expect(page).to have_content blog.title
     end
   end
+  
   context 'blog詳細ページでコメントした場合' do
     it 'blogの詳細ページにコメントが表示されること' do
       blog = Blog.create(title: 'title_01', content: 'content_01')
@@ -36,6 +39,7 @@ RSpec.describe "Blogs", type: :system do
       expect(page).to have_content 'comment_01'
     end
   end
+  
   context 'blog詳細ページでコメントを削除した場合' do
     it 'blogの詳細ページからコメントが削除されること' do
       blog = Blog.create(title: 'title_01', content: 'content_01')
@@ -53,6 +57,7 @@ RSpec.describe "Blogs", type: :system do
       expect(page).not_to have_content comment.content
     end
   end
+  
   context 'blog詳細ページで編集画面へのリンクをクリックした場合' do
     it 'blogの編集ページが表示されること' do
       blog = Blog.create(title: 'title_01', content: 'content_01')
@@ -62,6 +67,7 @@ RSpec.describe "Blogs", type: :system do
       expect(page).to have_content 'Editing Blog'
     end
   end
+  
   context 'blog編集ページにアクセスした場合' do
     it 'blogの編集用フォームが表示されること' do
       blog = Blog.create(title: 'title_01', content: 'content_01')
@@ -70,6 +76,7 @@ RSpec.describe "Blogs", type: :system do
       expect(page).to have_content 'Title'
       expect(page).to have_content 'Content'
     end
+    
     it 'blogの編集用フォームに編集前のblog情報が表示されること' do
       blog = Blog.create(title: 'title_01', content: 'content_01')
       visit edit_blog_path(blog)
@@ -84,6 +91,7 @@ RSpec.describe "Blogs", type: :system do
       expect(page).to have_content 'content_edit_01'
     end
   end
+  
   context 'blog新規作成ページにアクセスした場合' do
     it 'blogの新規作成ページが正しく表示されていること' do
       blog = Blog.create(title: 'title_01', content: 'content_01')
@@ -91,6 +99,7 @@ RSpec.describe "Blogs", type: :system do
       click_on 'New Blog'
       expect(page).to have_content 'New Blog'
     end
+    
     it 'blogの新規作成ができること' do
       visit new_blog_path
       fill_in :blog_title, with: 'title_01'
@@ -99,6 +108,7 @@ RSpec.describe "Blogs", type: :system do
       expect(page).to have_content 'Blog was successfully created.'
       expect(page).to have_content 'title_01'
     end
+    
     it 'blogの新規作成でcontentも正しく作成できること' do
       visit new_blog_path
       fill_in :blog_title, with: 'title_01'
@@ -109,6 +119,7 @@ RSpec.describe "Blogs", type: :system do
       expect(page).to have_content 'content_01'
     end
   end
+  
   context 'blog一覧ページでblogを削除しようとした場合' do
     it 'blogが一覧ページから削除されること' do
       blog = Blog.create(title: 'title_01', content: 'content_01')
