@@ -1,6 +1,9 @@
 <p>
   <strong><%= comment.name %>:</strong>
   <%= comment.content %>
-  <%= link_to 'Delete', [comment.blog, comment],
-              method: :delete, class: "button is-danger", data: { confirm: 'Are you sure?' } %>
+  <%# <%= link_to 'Delete', [comment.blog, comment],
+              method: :delete, class: "button is-danger", data: { confirm: 'Are you sure?' } %> 
+  <%= link_to 'Delete', blog_comment_path(comment.blog.id, comment.id), 
+              method: :DELETE, class: "button is-danger", data: { confirm: 'Are you sure?' } %>
 </p>
+

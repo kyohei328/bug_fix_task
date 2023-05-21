@@ -2,14 +2,19 @@ class CommentsController < ApplicationController
   before_action :set_blog, only: [:create, :destroy]
 
   def create
+    # binding.pry
     @comment = @blog.comments.create(comment_params)
-    redirect_to blog_path(@blog)
+    if @comment.save
+      redirect_to blog_path(@blog)
+    else
+      render :show
+    end
   end
 
   def destroy
     @comment = @blog.comments.find(params[:id])
     @comment.destroy
-    redirect_to
+    redirect_to blog_path(@blog)
   end
 
   private
